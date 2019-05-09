@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initData() {
         contents = new ArrayList<>();
-        for (int i = 0; i <100; i++){
+        for (int i = 0; i < 100; i++) {
             contents.add("-----this is -----" + i);
         }
 
@@ -44,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
         img_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (popupWindow == null){
+                if (popupWindow == null) {
                     popupWindow = new PopupWindow();
                     popupWindow.setContentView(listView);
-                    popupWindow.setHeight(200);
+                    int height = DensityUtil.px2dip(MainActivity.this, 200);
+                    popupWindow.setHeight(height);
                     popupWindow.setWidth(et_text.getWidth());
                     popupWindow.setFocusable(true);
                 }
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String content = contents.get(position);
                 et_text.setText(content);
-                if (popupWindow != null && popupWindow.isShowing()){
+                if (popupWindow != null && popupWindow.isShowing()) {
                     popupWindow.dismiss();
                     popupWindow = null;
                 }
@@ -98,14 +99,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
             ViewHolder viewHolder;
-            if (convertView == null){
+            if (convertView == null) {
                 convertView = View.inflate(MainActivity.this, R.layout.item_main, null);
                 viewHolder = new ViewHolder();
                 viewHolder.tx_content = convertView.findViewById(R.id.tv_content);
                 viewHolder.img_delete = convertView.findViewById(R.id.img_delete);
                 convertView.setTag(viewHolder);
 
-            }else {
+            } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             final String msg = contents.get(position);

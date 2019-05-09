@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i <100; i++){
             contents.add("-----this is -----" + i);
         }
-        myAdapter = new MyAdapter();
-        listView.setAdapter(myAdapter);
+
     }
 
     private void initEvent() {
@@ -52,6 +52,19 @@ public class MainActivity extends AppCompatActivity {
                     popupWindow.setFocusable(true);
                 }
                 popupWindow.showAsDropDown(et_text, 0, 0);
+            }
+        });
+        myAdapter = new MyAdapter();
+        listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String content = contents.get(position);
+                et_text.setText(content);
+                if (popupWindow != null && popupWindow.isShowing()){
+                    popupWindow.dismiss();
+                    popupWindow = null;
+                }
             }
         });
     }
@@ -88,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             if (convertView == null){
                 convertView = View.inflate(MainActivity.this, R.layout.item_main, null);
                 viewHolder = new ViewHolder();
-                viewHolder.tx_content = convertView.findViewById(R.id.et_text);
+                viewHolder.tx_content = convertView.findViewById(R.id.tv_content);
                 viewHolder.img_delete = convertView.findViewById(R.id.img_delete);
                 convertView.setTag(viewHolder);
 
@@ -105,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     myAdapter.notifyDataSetInvalidated();
                 }
             });
-            return null;
+            return convertView;
         }
     }
 

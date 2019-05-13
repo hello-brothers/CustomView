@@ -1,4 +1,4 @@
-package demo.lh.com.mytogglebuttom;
+package demo.lh.com.myattribute;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

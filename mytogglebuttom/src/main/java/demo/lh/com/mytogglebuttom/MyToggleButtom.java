@@ -1,6 +1,7 @@
 package demo.lh.com.mytogglebuttom;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -32,6 +33,7 @@ public class MyToggleButtom extends View implements View.OnClickListener {
      */
     public MyToggleButtom(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         initView();
     }
 

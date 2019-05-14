@@ -2,10 +2,14 @@ package demo.lh.com.myviewpager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
             imageView.setBackgroundResource(imgIds[i]);
             myViewPager.addView(imageView);
         }
+        View inflate = LayoutInflater.from(this).inflate(R.layout.test, null);
+        myViewPager.addView(inflate, 2);
         //动态添加RadioButtom
         for (int i = 0; i <myViewPager.getChildCount(); i++){
             RadioButton rb = new RadioButton(this);

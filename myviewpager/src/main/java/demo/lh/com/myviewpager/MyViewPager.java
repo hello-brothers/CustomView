@@ -17,6 +17,8 @@ public class MyViewPager extends ViewGroup {
     private int currentIndex;
     private Scroller scroller;
     private OnPagerChangListener mOnPagerChangListener;
+    private float downX;
+    private float downY;
 
     public MyViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -56,6 +58,30 @@ public class MyViewPager extends ViewGroup {
         }
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        boolean result = false;
+        gestureDetector.onTouchEvent(ev);
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                downX = ev.getX();
+                downY = ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float endX = ev.getX();
+                float endY = ev.getY();
+                float distanceX = Math.abs(endX - downX);
+                float distanceY = Math.abs(endY - downY);
+                if (distanceX > distanceY && distanceX > 5){
+                    result = true;
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return result;
+    }
+
     float startX;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -81,6 +107,16 @@ public class MyViewPager extends ViewGroup {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        for (int i = 0; i <getChildCount(); i++){
+            View childAt = getChildAt(i);
+            childAt.measure(widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
     public void scrollToPager(int tempIndex) {

@@ -1,1 +1,1 @@
-include ':app', ':youkucaidan', ':propertyanimation', ':viewpagertest', ':popupwindow', ':mytogglebuttom', ':myattribute', ':myviewpager', ':myeventtest', ':quickindex'
+include ':app', ':youkucaidan', ':propertyanimation', ':viewpagertest', ':popupwindow', ':mytogglebuttom', ':myattribute', ':myviewpager', ':myeventtest', ':quickindex', ':slidemenu'
